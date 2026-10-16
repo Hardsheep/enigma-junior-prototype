@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=0.3">
+  <link rel="stylesheet" href="styles.css?v=0.4">
 </head>
 <body>
 
@@ -18,6 +18,7 @@
       <a href="#top" class="logo">ENIGMA <span class="logo-tag">JUNIOR</span></a>
       <nav class="nav">
         <a href="#fit">Для кого</a>
+        <a href="#why">Почему мы</a>
         <a href="#program">Программа</a>
         <a href="#coaches">Тренеры</a>
         <a href="#cases">Кейсы</a>
@@ -42,7 +43,6 @@
             <span class="arrow">→</span>
             <span>NL25</span>
           </div>
-          <div class="muted mono">3 уровня программы · в своём темпе</div>
           <p class="hero-sub">Видеоуроки, домашки с проверкой тренера, тесты и живые разборы раздач с действующими игроками. Каждый уровень — новые навыки, которые видно в твоих результатах.</p>
           <div class="hero-cta">
             <button class="btn btn-primary" data-open-apply>Начать обучение</button>
@@ -103,37 +103,32 @@
       </div>
     </section>
 
-    <!-- What's included -->
-    <section id="included">
+    <!-- Why Enigma (merged with "what's included") -->
+    <section id="why">
       <div class="wrap">
-        <div class="eyebrow">Что входит</div>
-        <h2 class="section-title">Обучение, в котором ни одна тема не остаётся без практики</h2>
-        <p class="section-lead">Каждая тема проходит один цикл: вебинар → контрольные вопросы → домашнее задание → практика с тренером.</p>
+        <div class="eyebrow">Почему Enigma</div>
+        <h2 class="section-title">Почему стоит учиться у нас, а не в другой школе</h2>
         <div class="grid grid-4">
-          <div class="card reveal">
-            <div class="inc-num"><span class="ph">[N]</span></div>
-            <h3>Уроков на 3 уровнях</h3>
-            <p>Видеокурс на платформе. Доступ с первого дня.</p>
+          <div class="card why-card reveal">
+            <span class="num">01</span>
+            <h3>Системная программа</h3>
+            <p>Понедельный план вместо набора видео. Каждая тема проходит цикл: вебинар → контрольные вопросы → домашка → практика с тренером.</p>
           </div>
-          <div class="card reveal">
-            <div class="inc-num"><span class="ph">[N]</span></div>
-            <h3>Домашних заданий</h3>
-            <p>Каждое проверяет тренер и даёт обратную связь.</p>
+          <div class="card why-card reveal">
+            <span class="num">02</span>
+            <h3>Тренеры играют сами</h3>
+            <p>Учат действующие игроки, которые сейчас играют на лимитах намного выше твоего.</p>
           </div>
-          <div class="card reveal">
-            <div class="inc-num"><span class="ph">[N]</span>/нед</div>
-            <h3>Живых тренировок</h3>
-            <p>Разборы раздач в группе с действующим игроком.</p>
+          <div class="card why-card reveal">
+            <span class="num">03</span>
+            <h3>Обратная связь на всё</h3>
+            <p>Домашки проверяет тренер, на живых тренировках разбираем твои раздачи, а тесты по уровням показывают реальный прогресс.</p>
           </div>
-          <div class="card reveal">
-            <div class="inc-num">24/7</div>
-            <h3>Discord-сообщество</h3>
-            <p>Закрытый сервер учеников: вопросы, раздачи, поддержка.</p>
+          <div class="card why-card reveal">
+            <span class="num">04</span>
+            <h3>Сообщество</h3>
+            <p>Закрытый Discord учеников: вопросы, раздачи, поддержка тренеров и таких же игроков, как ты.</p>
           </div>
-        </div>
-        <div class="honest reveal">
-          <b>Важно</b>
-          <p class="muted">Junior — это обучение, а не бэкинг: ты играешь на свой банкролл, а мы отвечаем за то, чтобы ты играл лучше.</p>
         </div>
       </div>
     </section>
@@ -141,17 +136,19 @@
     <!-- Program: levels + growing character -->
     <section class="section-alt scene-section" id="program">
       <div class="wrap">
-        <div class="eyebrow">Программа</div>
-        <h2 class="section-title">Как ты будешь расти</h2>
-
         <div class="scene" data-scene>
           <div class="scene-sticky">
+            <div class="scene-head">
+              <div class="eyebrow">Программа</div>
+              <h2 class="section-title">Как ты будешь расти</h2>
+            </div>
+            <div class="scene-grid">
             <div class="scene-side">
               <div class="scene-rail">
                 <button><span class="idx">01</span><span class="txt">Уровень 1<small>Математика покера</small></span></button>
                 <button><span class="idx">02</span><span class="txt">Уровень 2<small>Статы, софт, позиция</small></span></button>
                 <button><span class="idx">03</span><span class="txt">Уровень 3<small>Диапазоны</small></span></button>
-                <button><span class="idx">★</span><span class="txt">После курса<small>Уверенный регуляр</small></span></button>
+                <button><span class="idx"><svg class="trophy" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M17 5h3v2a3 3 0 0 1-3 3M7 5H4v2a3 3 0 0 0 3 3"/></svg></span><span class="txt">После курса<small>Уверенный регуляр</small></span></button>
               </div>
               <div class="scene-progress"><i data-scene-progress></i></div>
             </div>
@@ -212,7 +209,7 @@
 
                   <g class="fig-body">
                     <!-- cape (champion) -->
-                    <path class="lv lv-4" d="M90 116 Q120 108 150 116 Q186 160 214 238 Q200 244 190 236 L198 266 Q178 262 166 250 L172 280 Q150 268 140 206 Z" fill="#0f5e5d" stroke="#19fbf9" stroke-width="1.5"/>
+                    <path class="lv lv-4" d="M90 116 Q120 108 150 116 Q190 168 208 262 Q178 274 146 264 Q148 226 140 206 Z" fill="#0f5e5d" stroke="#19fbf9" stroke-width="1.5"/>
 
                     <!-- legs -->
                     <rect x="100" y="198" width="17" height="90" rx="5" fill="#5e4b37"/>
@@ -261,7 +258,11 @@
                     <g class="lv lv-3 lv-4">
                       <path d="M87 118 Q120 104 153 118 L155 204 Q120 216 85 204 Z" fill="#a9b8c6" stroke="#6f8191" stroke-width="1.5"/>
                       <path d="M120 114 L120 206" stroke="#6f8191" stroke-width="1.5"/>
-                      <path d="M120 138 L132 152 L120 166 L108 152 Z" fill="#19fbf9"/>
+                      <path class="lv lv-3" d="M120 138 L132 152 L120 166 L108 152 Z" fill="#19fbf9"/>
+                      <g class="lv lv-4">
+                        <path d="M106 134 L134 134 L134 156 Q120 178 106 156 Z" fill="#33424f" stroke="#19fbf9" stroke-width="1.5"/>
+                        <text x="120" y="156" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="17" fill="#19fbf9">E</text>
+                      </g>
                       <rect x="85" y="186" width="70" height="8" fill="#6f8191"/>
                       <ellipse cx="82" cy="124" rx="19" ry="12" fill="#dfe8ef" stroke="#6f8191" stroke-width="1.5"/>
                       <ellipse cx="158" cy="124" rx="19" ry="12" fill="#dfe8ef" stroke="#6f8191" stroke-width="1.5"/>
@@ -324,11 +325,11 @@
                         <rect x="147" y="196" width="33" height="6" rx="2" fill="#19fbf9"/>
                       </g>
                       <g>
-                        <ellipse cx="54" cy="290" rx="16" ry="5" fill="#19fbf9"/>
-                        <ellipse cx="54" cy="284" rx="16" ry="5" fill="#0b0d14" stroke="#19fbf9"/>
-                        <ellipse cx="54" cy="278" rx="16" ry="5" fill="#19fbf9"/>
-                        <ellipse cx="54" cy="272" rx="16" ry="5" fill="#0b0d14" stroke="#19fbf9"/>
-                        <ellipse cx="54" cy="266" rx="16" ry="5" fill="#f2c94c"/>
+                        <ellipse cx="54" cy="290" rx="16" ry="5" fill="#f2c94c" stroke="#b8901f" stroke-width="1.2"/>
+                        <ellipse cx="54" cy="284" rx="16" ry="5" fill="#f2c94c" stroke="#b8901f" stroke-width="1.2"/>
+                        <ellipse cx="54" cy="278" rx="16" ry="5" fill="#f2c94c" stroke="#b8901f" stroke-width="1.2"/>
+                        <ellipse cx="54" cy="272" rx="16" ry="5" fill="#f2c94c" stroke="#b8901f" stroke-width="1.2"/>
+                        <ellipse cx="54" cy="266" rx="16" ry="5" fill="#ffe08a" stroke="#b8901f" stroke-width="1.2"/>
                       </g>
                       <path d="M196 70 l3 8 8 3 -8 3 -3 8 -3 -8 -8 -3 8 -3 Z" fill="#19fbf9"/>
                       <path d="M40 110 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z" fill="#19fbf9"/>
@@ -344,145 +345,107 @@
 
               <div class="scene-cue" data-scene-cue><span class="mouse"></span><span class="mono" data-scene-count>01 / 04</span></div>
             </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Why Enigma -->
-    <section id="why">
-      <div class="wrap">
-        <div class="eyebrow">Почему Enigma</div>
-        <h2 class="section-title">Почему стоит учиться у нас, а не в другой школе</h2>
-        <div class="grid grid-4">
-          <div class="card why-card reveal">
-            <span class="num">01</span>
-            <h3>Системная программа</h3>
-            <p>Понедельный план, а не набор видео. Всегда понятно, что делать на этой неделе.</p>
-          </div>
-          <div class="card why-card reveal">
-            <span class="num">02</span>
-            <h3>Тренеры играют сами</h3>
-            <p>Учат действующие игроки, которые сейчас играют на лимитах намного выше твоего.</p>
-          </div>
-          <div class="card why-card reveal">
-            <span class="num">03</span>
-            <h3>Обратная связь на всё</h3>
-            <p>Каждую домашку проверяет тренер, а на тренировках разбираем твои раздачи, а не абстрактные.</p>
-          </div>
-          <div class="card why-card reveal">
-            <span class="num">04</span>
-            <h3>Прогресс в цифрах</h3>
-            <p>Тесты по уровням и статистика игры показывают, как ты растёшь, а не только как ощущается.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Methodologist & coaches: horizontal carousel driven by vertical scroll -->
-    <section class="section-alt hscroll-section" id="coaches">
-      <div class="hscroll" data-hscroll>
-        <div class="hscroll-sticky">
-          <div class="wrap">
+    <!-- Methodologist & coaches: arrow carousel -->
+    <section id="coaches">
+      <div class="wrap" data-carousel>
+        <div class="carousel-head">
+          <div>
             <div class="eyebrow">Кто учит</div>
             <h2 class="section-title">Автор программы и тренеры</h2>
           </div>
-          <div class="hscroll-viewport">
-            <div class="hscroll-track" data-hscroll-track>
-              <div class="card methodologist">
-                <div class="ph-block">[Фото методолога]</div>
-                <div>
-                  <div class="eyebrow" style="margin-bottom:10px">Методолог курса</div>
-                  <h3 style="font-size:26px"><span class="ph">[Имя Фамилия]</span></h3>
-                  <p class="muted" style="margin-top:10px"><span class="ph">[1–2 предложения: опыт, почему программа устроена именно так]</span></p>
-                  <div class="stats">
-                    <div><b><span class="ph">[N]</span></b><span>учеников прошли курс</span></div>
-                    <div><b><span class="ph">[N]</span></b><span>сейчас играют NL200+</span></div>
-                  </div>
+          <div class="carousel-nav">
+            <button class="arrow-btn" data-carousel-prev aria-label="Назад">←</button>
+            <button class="arrow-btn" data-carousel-next aria-label="Вперёд">→</button>
+          </div>
+        </div>
+        <div class="carousel-track" data-carousel-track>
+            <div class="card methodologist">
+              <div class="ph-block">[Фото методолога]</div>
+              <div>
+                <div class="eyebrow" style="margin-bottom:10px">Методолог курса</div>
+                <h3 style="font-size:26px"><span class="ph">[Имя Фамилия]</span></h3>
+                <p class="muted" style="margin-top:10px"><span class="ph">[1–2 предложения: опыт, почему программа устроена именно так]</span></p>
+                <div class="stats">
+                  <div><b><span class="ph">[N]</span></b><span>учеников прошли курс</span></div>
+                  <div><b><span class="ph">[N]</span></b><span>сейчас играют NL200+</span></div>
                 </div>
               </div>
-              <div class="card person">
-                <div class="ph-block">[Фото тренера]</div>
-                <div class="meta">NL<span class="ph">[X]</span> · действующий игрок</div>
-                <h3><span class="ph">[Имя]</span></h3>
-                <p class="muted">Ведёт <span class="ph">[уровень / группу]</span></p>
-              </div>
-              <div class="card person">
-                <div class="ph-block">[Фото тренера]</div>
-                <div class="meta">NL<span class="ph">[X]</span> · действующий игрок</div>
-                <h3><span class="ph">[Имя]</span></h3>
-                <p class="muted">Ведёт <span class="ph">[уровень / группу]</span></p>
-              </div>
-              <div class="card person">
-                <div class="ph-block">[Фото тренера]</div>
-                <div class="meta">NL<span class="ph">[X]</span> · действующий игрок</div>
-                <h3><span class="ph">[Имя]</span></h3>
-                <p class="muted">Ведёт <span class="ph">[уровень / группу]</span></p>
-              </div>
             </div>
-          </div>
-          <div class="wrap hscroll-foot">
-            <div class="hscroll-bar"><i data-hscroll-progress></i></div>
-            <div class="hscroll-cue"><span class="mouse"></span><span class="mono" data-hscroll-count></span></div>
-          </div>
+            <div class="card person">
+              <div class="ph-block">[Фото тренера]</div>
+              <div class="meta">NL<span class="ph">[X]</span> · действующий игрок</div>
+              <h3><span class="ph">[Имя]</span></h3>
+              <p class="muted">Ведёт <span class="ph">[уровень / группу]</span></p>
+            </div>
+            <div class="card person">
+              <div class="ph-block">[Фото тренера]</div>
+              <div class="meta">NL<span class="ph">[X]</span> · действующий игрок</div>
+              <h3><span class="ph">[Имя]</span></h3>
+              <p class="muted">Ведёт <span class="ph">[уровень / группу]</span></p>
+            </div>
+        </div>
+        <div class="carousel-foot">
+          <div class="carousel-bar"><i data-carousel-progress></i></div>
+          <span class="mono" data-carousel-count></span>
         </div>
       </div>
     </section>
 
-    <!-- Cases: horizontal carousel driven by vertical scroll -->
-    <section class="hscroll-section" id="cases">
-      <div class="hscroll" data-hscroll>
-        <div class="hscroll-sticky">
-          <div class="wrap">
+    <!-- Cases: arrow carousel -->
+    <section class="section-alt" id="cases">
+      <div class="wrap" data-carousel>
+        <div class="carousel-head">
+          <div>
             <div class="eyebrow">Результаты учеников</div>
             <h2 class="section-title">Игроки, которые начинали в Junior</h2>
           </div>
-          <div class="hscroll-viewport">
-            <div class="hscroll-track" data-hscroll-track>
-              <div class="card case featured">
-                <div class="case-tag">Из учеников — в тренеры</div>
-                <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL500</div>
-                <h3><span class="ph">[Ник]</span></h3>
-                <p>Пришёл в Junior на микролимиты, прошёл программу и поднялся до NL500. Тренировал учеников Junior, теперь ведёт группы основы.</p>
-                <div class="ph-block">[График / скрин результата за период]</div>
-              </div>
-              <div class="card case">
-                <div class="case-tag">За <span class="ph">[N]</span> мес · <span class="ph">[год]</span></div>
-                <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL<span class="ph">[b]</span></div>
-                <h3><span class="ph">[Ник]</span></h3>
-                <p><span class="ph">[Цитата ученика: что изменилось в игре]</span></p>
-                <div class="ph-block">[График / скрин результата за период]</div>
-              </div>
-              <div class="card case">
-                <div class="case-tag">За <span class="ph">[N]</span> мес · <span class="ph">[год]</span></div>
-                <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL<span class="ph">[b]</span></div>
-                <h3><span class="ph">[Ник]</span></h3>
-                <p><span class="ph">[Цитата ученика: что изменилось в игре]</span></p>
-                <div class="ph-block">[График / скрин результата за период]</div>
-              </div>
-              <div class="card case">
-                <div class="case-tag">За <span class="ph">[N]</span> мес · <span class="ph">[год]</span></div>
-                <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL<span class="ph">[b]</span></div>
-                <h3><span class="ph">[Ник]</span></h3>
-                <p><span class="ph">[Цитата ученика: что изменилось в игре]</span></p>
-                <div class="ph-block">[График / скрин результата за период]</div>
-              </div>
+          <div class="carousel-nav">
+            <button class="arrow-btn" data-carousel-prev aria-label="Назад">←</button>
+            <button class="arrow-btn" data-carousel-next aria-label="Вперёд">→</button>
+          </div>
+        </div>
+        <div class="carousel-track" data-carousel-track>
+            <div class="card case featured">
+              <div class="case-tag">Из учеников — в тренеры</div>
+              <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL500</div>
+              <h3><span class="ph">[Ник]</span></h3>
+              <p>Пришёл в Junior на микролимиты, прошёл программу и поднялся до NL500. Тренировал учеников Junior, теперь ведёт группы основы.</p>
+              <div class="ph-block">[График / скрин результата за период]</div>
             </div>
-          </div>
-          <div class="wrap hscroll-foot">
-            <div class="hscroll-bar"><i data-hscroll-progress></i></div>
-            <div class="hscroll-cue"><span class="mouse"></span><span class="mono" data-hscroll-count></span></div>
-          </div>
+            <div class="card case">
+              <div class="case-tag">За <span class="ph">[N]</span> мес · <span class="ph">[год]</span></div>
+              <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL<span class="ph">[b]</span></div>
+              <h3><span class="ph">[Ник]</span></h3>
+              <p><span class="ph">[Цитата ученика: что изменилось в игре]</span></p>
+              <div class="ph-block">[График / скрин результата за период]</div>
+            </div>
+            <div class="card case">
+              <div class="case-tag">За <span class="ph">[N]</span> мес · <span class="ph">[год]</span></div>
+              <div class="case-route">NL<span class="ph">[a]</span><span class="arrow">→</span>NL<span class="ph">[b]</span></div>
+              <h3><span class="ph">[Ник]</span></h3>
+              <p><span class="ph">[Цитата ученика: что изменилось в игре]</span></p>
+              <div class="ph-block">[График / скрин результата за период]</div>
+            </div>
+        </div>
+        <div class="carousel-foot">
+          <div class="carousel-bar"><i data-carousel-progress></i></div>
+          <span class="mono" data-carousel-count></span>
         </div>
       </div>
     </section>
 
     <!-- Lead magnet banner -->
-    <section class="section-alt">
+    <section>
       <div class="wrap">
         <div class="lm-banner reveal">
           <div>
-            <div class="eyebrow">Бесплатно</div>
+            <div class="eyebrow">Бонус для своих</div>
             <h2>Префлоп-чарты, по которым учатся наши ученики</h2>
             <p>Открытые и защитные диапазоны для 6-max. Пришлём в Telegram или на почту.</p>
           </div>
@@ -492,7 +455,7 @@
     </section>
 
     <!-- Apply -->
-    <section id="apply">
+    <section class="section-alt" id="apply">
       <div class="wrap apply-grid">
         <div class="reveal">
           <div class="eyebrow">Заявка</div>
@@ -527,7 +490,7 @@
         <a href="#" data-manager>Менеджер</a>
         <a href="https://enigmapoker.pro" target="_blank" rel="noopener">Enigma Poker Fund</a>
       </div>
-      <small>Прототип · v0.3 · 16.10.2026</small>
+      <small>Прототип · v0.4 · 16.10.2026</small>
     </div>
   </footer>
 
@@ -539,6 +502,6 @@
     <div class="form" data-apply-form data-in-modal></div>
   </div>
 
-  <script src="main.js?v=0.3"></script>
+  <script src="main.js?v=0.4"></script>
 </body>
 </html>

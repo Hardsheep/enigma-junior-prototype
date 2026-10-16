@@ -1,5 +1,9 @@
 /**
- * Enigma Junior — prototype scripts - VERSION 0.3
+ * Enigma Junior — prototype scripts - VERSION 0.4
+ *
+ * v0.4 - Feedback round 3:
+ * - Coaches/cases carousels switched to arrows + swipe
+ * - Program scroll more sensitive (40vh per slide)
  *
  * v0.3 - Feedback round 2:
  * - Horizontal card carousels (coaches, cases) driven by vertical scroll
@@ -267,7 +271,7 @@
   });
 
   // ---------- Scroll-driven carousels (program, coaches, cases) ----------
-  const STEP_VH = 70; // scroll distance per slide, in vh
+  const STEP_VH = 40; // scroll distance per slide, in vh
   const FIGURE_NAMES = ['Крестьянин', 'Оруженосец', 'Рыцарь', 'Чемпион стола'];
   const header = $('.header');
   const setHeaderVar = () => document.documentElement.style.setProperty('--header-h', `${header ? header.offsetHeight : 0}px`);
@@ -333,33 +337,46 @@
     return update;
   });
 
-  // Horizontal tracks: vertical scroll moves the card row sideways while the block is pinned
-  const hscrolls = $$('[data-hscroll]').map((box) => {
-    const track = $('[data-hscroll-track]', box);
-    const bar = $('[data-hscroll-progress]', box);
-    const count = $('[data-hscroll-count]', box);
+  // Arrow carousels (coaches, cases): buttons + native swipe with scroll-snap
+  $$('[data-carousel]').forEach((box) => {
+    const track = $('[data-carousel-track]', box);
+    const prev = $('[data-carousel-prev]', box);
+    const next = $('[data-carousel-next]', box);
+    const bar = $('[data-carousel-progress]', box);
+    const count = $('[data-carousel-count]', box);
     const cards = Array.from(track.children);
     const pad = (x) => String(x).padStart(2, '0');
-    let shift = 0;
 
-    const measure = () => {
-      shift = Math.max(0, track.scrollWidth - window.innerWidth);
-      const stickyH = window.innerHeight - (header ? header.offsetHeight : 0);
-      box.style.height = `${stickyH + shift}px`;
+    const currentIndex = () => {
+      const left = track.scrollLeft;
+      let best = 0;
+      cards.forEach((c, i) => {
+        if (Math.abs(c.offsetLeft - cards[0].offsetLeft - left) < Math.abs(cards[best].offsetLeft - cards[0].offsetLeft - left)) best = i;
+      });
+      return best;
     };
 
     const update = () => {
-      const start = box.getBoundingClientRect().top + window.scrollY - (header ? header.offsetHeight : 0);
-      const p = shift ? Math.max(0, Math.min(1, (window.scrollY - start) / shift)) : 0;
-      track.style.transform = `translate3d(${-p * shift}px, 0, 0)`;
-      if (bar) bar.style.width = `${Math.max(p, 1 / cards.length) * 100}%`;
-      const idx = Math.min(cards.length, Math.max(1, Math.round(p * (cards.length - 1)) + 1));
-      if (count) count.textContent = `${pad(idx)} / ${pad(cards.length)}`;
-      box.classList.toggle('is-end', p >= 0.99);
+      const max = track.scrollWidth - track.clientWidth;
+      const atStart = track.scrollLeft <= 2;
+      const atEnd = track.scrollLeft >= max - 2;
+      prev.disabled = atStart;
+      next.disabled = atEnd || max <= 0;
+      const idx = atEnd ? cards.length - 1 : currentIndex();
+      if (count) count.textContent = `${pad(idx + 1)} / ${pad(cards.length)}`;
+      if (bar) bar.style.width = `${((idx + 1) / cards.length) * 100}%`;
     };
 
-    measure();
-    return { measure, update };
+    const go = (dir) => {
+      const idx = Math.max(0, Math.min(cards.length - 1, currentIndex() + dir));
+      track.scrollTo({ left: cards[idx].offsetLeft - cards[0].offsetLeft, behavior: 'smooth' });
+    };
+
+    prev.addEventListener('click', () => go(-1));
+    next.addEventListener('click', () => go(1));
+    track.addEventListener('scroll', () => requestAnimationFrame(update), { passive: true });
+    window.addEventListener('resize', update);
+    update();
   });
 
   let ticking = false;
@@ -368,14 +385,11 @@
     ticking = true;
     requestAnimationFrame(() => {
       scenes.forEach((u) => u());
-      hscrolls.forEach((h) => h.update());
       ticking = false;
     });
   };
   window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', () => { setHeaderVar(); hscrolls.forEach((h) => h.measure()); onScroll(); });
-  // Fonts change card widths — re-measure once they are ready
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { hscrolls.forEach((h) => h.measure()); onScroll(); });
+  window.addEventListener('resize', () => { setHeaderVar(); onScroll(); });
   onScroll();
 
   // ---------- Reveal on scroll ----------
