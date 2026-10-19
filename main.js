@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — prototype scripts - VERSION 0.4
+ * Enigma Junior — prototype scripts - VERSION 0.5
+ *
+ * v0.5 - Rudolf feedback: promo/referral field, figure level names
  *
  * v0.4 - Feedback round 3:
  * - Coaches/cases carousels switched to arrows + swipe
@@ -154,6 +156,10 @@
             <option>Другое</option>
           </select>
         </div>
+        <div class="field">
+          <label>Промокод / реферальный код <span class="opt">(если есть)</span></label>
+          <input class="input" name="promo" autocomplete="off" placeholder="Например, от стримера или друга">
+        </div>
         ${utmInputs()}
         <button class="btn btn-primary btn-block" type="submit">Отправить заявку</button>
         <p class="form-foot">Нажимая кнопку, ты соглашаешься на обработку данных. <span class="ph">[ссылка на политику]</span></p>
@@ -272,7 +278,7 @@
 
   // ---------- Scroll-driven carousels (program, coaches, cases) ----------
   const STEP_VH = 40; // scroll distance per slide, in vh
-  const FIGURE_NAMES = ['Крестьянин', 'Оруженосец', 'Рыцарь', 'Чемпион стола'];
+  const FIGURE_NAMES = ['Воин', 'Рыцарь', 'Паладин', 'Чемпион стола'];
   const header = $('.header');
   const setHeaderVar = () => document.documentElement.style.setProperty('--header-h', `${header ? header.offsetHeight : 0}px`);
   setHeaderVar();
