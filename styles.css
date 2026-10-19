@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — prototype styles - VERSION 0.8
+ * Enigma Junior — prototype styles - VERSION 0.9
+ *
+ * v0.9 - Level quiz styles for prototype B
  *
  * v0.8 - «Почему 0 $» note, inline CTA strips
  *
@@ -244,6 +246,45 @@ section { padding: 64px 0; }
 }
 .cta-strip h3 { font-size: 22px; margin-bottom: 6px; }
 .cta-strip-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+
+/* Level quiz (prototype B) */
+.quiz-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
+.quiz-perks { margin-top: 24px; display: grid; gap: 10px; }
+.quiz-perks li { color: var(--text-2); display: flex; gap: 10px; }
+.quiz-perks li::before { content: "→"; color: var(--accent); font-family: var(--mono); }
+.quiz-card { background: var(--bg-card); border: 1px solid var(--line); border-radius: 20px; padding: 32px; min-height: 420px; }
+.quiz-top { display: flex; justify-content: space-between; align-items: center; color: var(--text-3); font-size: 13px; }
+.quiz-back { all: unset; cursor: pointer; color: var(--text-3); font-size: 14px; }
+.quiz-back:hover { color: var(--accent); }
+.quiz-bar { height: 4px; border-radius: 4px; background: var(--line); margin: 12px 0 24px; overflow: hidden; }
+.quiz-bar i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+.quiz-q { font-size: 22px; margin-bottom: 20px; }
+.quiz-options { display: grid; gap: 10px; }
+.quiz-opt {
+  all: unset;
+  cursor: pointer;
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 1px solid var(--line-strong);
+  background: var(--bg-deep);
+  color: var(--text);
+  font-size: 16px;
+  transition: border-color .2s, background .2s;
+}
+.quiz-opt:hover { border-color: var(--accent); }
+.quiz-opt.picked { border-color: var(--accent); background: var(--accent-soft); }
+.quiz-result { display: grid; gap: 12px; }
+.quiz-score { font-size: 44px; font-weight: 700; color: var(--accent); line-height: 1; }
+.quiz-result h3 { font-size: 24px; }
+.quiz-cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.quiz-review { margin-top: 8px; border-top: 1px solid var(--line); padding-top: 12px; }
+.quiz-review summary { cursor: pointer; color: var(--accent); font-weight: 600; }
+.quiz-review ul { margin-top: 12px; display: grid; gap: 12px; }
+.quiz-review li { display: flex; gap: 10px; font-size: 14px; color: var(--text-2); }
+.quiz-review li b { color: var(--text); font-weight: 600; }
+.quiz-review .mark { font-family: var(--mono); flex: none; }
+.quiz-review .ok .mark { color: var(--accent); }
+.quiz-review .miss .mark { color: var(--gold); }
 
 /* Fit block */
 .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
@@ -641,7 +682,8 @@ section { padding: 64px 0; }
   .grid-4 { grid-template-columns: repeat(2, 1fr); }
   .hero-grid,
   .apply-grid,
-  .lm-grid { grid-template-columns: 1fr; gap: 40px; }
+  .lm-grid,
+  .quiz-grid { grid-template-columns: 1fr; gap: 40px; }
   .scene-grid { grid-template-columns: 1fr; gap: 14px; }
   .scene-rail { grid-auto-flow: column; grid-auto-columns: 1fr; }
   .scene-rail::before { left: 10%; right: 10%; top: 30px; bottom: auto; width: auto; height: 1px; }
@@ -694,6 +736,8 @@ section { padding: 64px 0; }
   .avatar-lg { width: 72px; height: 72px; }
   .mobile-cta { display: block; }
   .cta-strip { padding: 22px 20px; }
+  .quiz-card { padding: 22px 18px; min-height: 0; }
+  .quiz-cta .btn { width: 100%; }
   .cta-strip-btns, .cta-strip-btns .btn { width: 100%; }
   .hero-facts { gap: 20px; }
 }
