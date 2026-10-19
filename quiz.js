@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — level quiz (prototype B) - VERSION 0.1
+ * Enigma Junior — level quiz (prototype B) - VERSION 0.2
+ *
+ * v0.2 - «Пока рано» result leads to Enigma Start (course of basics)
  *
  * v0.1 - Initial quiz:
  * - 5 placeholder knowledge questions + 2 profile questions
@@ -104,10 +106,10 @@
     early: {
       tag: 'Пока рано',
       title: 'Начни с базы — вот с чего лучше стартовать',
-      text: 'Программа Junior рассчитана на тех, кто уже играет и знает основы. Забери материалы, разберись с базой и возвращайся — будем ждать.',
-      primary: { label: 'Забрать префлоп-чарты', href: '../lead-magnet.html' },
+      text: 'Программа Junior рассчитана на тех, кто уже играет и знает основы. Начни с Enigma Start — курса азов: лучших по финальному тесту зовём на отбор в Junior.',
+      primary: { label: 'Курс азов Enigma Start', href: '../start/' },
       secondary: { label: 'Всё равно подать заявку', apply: true },
-      extra: { label: 'Telegram-канал с теорией', href: 'https://t.me/enigmapoker' },
+      extra: { label: 'Забрать префлоп-чарты', href: '../lead-magnet.html' },
     },
     junior: {
       tag: 'Тебе подходит Junior',

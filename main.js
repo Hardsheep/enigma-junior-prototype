@@ -1,5 +1,9 @@
 /**
- * Enigma Junior — prototype scripts - VERSION 0.8
+ * Enigma Junior — prototype scripts - VERSION 0.9
+ *
+ * v0.9 - Enigma Start support (<body data-discipline="start">):
+ * - Experience / hours fields, recording consent checkbox
+ * - Per-discipline form hint, submit label and success screen
  *
  * v0.8 - Response time: «в течение рабочего дня»
  *
@@ -64,7 +68,8 @@
       return true;
     },
     email: (v) => EMAIL_RE.test(v.trim()) || 'Проверь email — это запасной канал, если в контакте опечатка',
-    limit: (v) => !!v || 'Выбери текущий лимит или ABI',
+    limit: (v) => !!v || 'Выбери вариант',
+    consent: (v, form) => form.elements.consent.checked || 'Без согласия на запись в первый поток не попасть',
   };
 
   function validateField(form, name) {
@@ -112,6 +117,19 @@
       volumeLabel: 'Турниров в месяц',
       volumes: ['до 300', '300–800', '800–1500', '1500+'],
     },
+    start: {
+      title: 'Запись в первый поток Enigma Start',
+      hint: 'Менеджер напишет, расскажет о старте и оплате. Платить сейчас не нужно',
+      limitLabel: 'Опыт в покере',
+      limits: ['Никогда не играл', 'Играл с друзьями', 'Играл онлайн на фишки', 'Играю на деньги для себя'],
+      volumeLabel: 'Часов в неделю на учёбу',
+      volumes: ['до 3', '3–6', '6–10', '10+'],
+      consent: 'Согласен, что занятия первого потока записываются и войдут в курс. Ник и голос можно скрыть по запросу',
+      submit: 'Записаться в поток',
+      successTitle: 'Ты в списке первого потока',
+      successText: 'расскажет о дате старта, цене и оплате',
+      leadMagnet: false,
+    },
   };
   const FORM = FORM_CONFIG[document.body.dataset.discipline] || FORM_CONFIG.cash;
   const options = (list) => list.map((x) => `<option>${x}</option>`).join('');
@@ -121,7 +139,7 @@
       ${inModal ? '<button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>' : ''}
       <form novalidate>
         <h3>${FORM.title}</h3>
-        <p class="hint">Менеджер напишет тебе в выбранный мессенджер</p>
+        <p class="hint">${FORM.hint || 'Менеджер напишет тебе в выбранный мессенджер'}</p>
         <div class="field">
           <label>Имя</label>
           <input class="input" name="name" autocomplete="given-name" placeholder="Как к тебе обращаться">
@@ -177,8 +195,12 @@
           <label>Промокод / реферальный код <span class="opt">(если есть)</span></label>
           <input class="input" name="promo" autocomplete="off" placeholder="Например, от стримера или друга">
         </div>
+        ${FORM.consent ? `<div class="field field-check">
+          <label><input type="checkbox" name="consent"> <span>${FORM.consent}</span></label>
+          <span class="err"></span>
+        </div>` : ''}
         ${utmInputs()}
-        <button class="btn btn-primary btn-block" type="submit">Отправить заявку</button>
+        <button class="btn btn-primary btn-block" type="submit">${FORM.submit || 'Отправить заявку'}</button>
         <p class="form-foot">Нажимая кнопку, ты соглашаешься на обработку данных. <span class="ph">[ссылка на политику]</span></p>
       </form>`;
   }
@@ -189,12 +211,12 @@
       ${inModal ? '<button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>' : ''}
       <div class="success">
         <div class="check">✓</div>
-        <h3>Заявка принята, ${escapeHtml(data.name.trim())}</h3>
-        <p>Менеджер напишет в ${channel} (<span class="mono">${escapeHtml(data.contact.trim())}</span>) в течение рабочего дня. Если в контакте опечатка — продублируем на ${escapeHtml(data.email.trim())}.</p>
+        <h3>${FORM.successTitle || 'Заявка принята'}, ${escapeHtml(data.name.trim())}</h3>
+        <p>Менеджер напишет в ${channel} (<span class="mono">${escapeHtml(data.contact.trim())}</span>) в течение рабочего дня${FORM.successText ? ' и ' + FORM.successText : ''}. Если в контакте опечатка — продублируем на ${escapeHtml(data.email.trim())}.</p>
         <div class="btns">
           <a class="btn btn-primary" href="#" data-manager>Написать менеджеру сейчас</a>
           <a class="btn btn-ghost" href="${TG_CHANNEL_URL}" target="_blank" rel="noopener">Пока ждёшь — Telegram-канал</a>
-          <a class="btn btn-ghost" href="lead-magnet.html">Забрать префлоп-чарты</a>
+          ${FORM.leadMagnet === false ? '' : '<a class="btn btn-ghost" href="lead-magnet.html">Забрать префлоп-чарты</a>'}
         </div>
       </div>`;
   }
@@ -203,7 +225,8 @@
     const inModal = container.hasAttribute('data-in-modal');
     container.innerHTML = applyFormHtml(inModal);
     const form = $('form', container);
-    bindValidation(form, ['name', 'contact', 'email', 'limit']);
+    const required = ['name', 'contact', 'email', 'limit'].concat(FORM.consent ? ['consent'] : []);
+    bindValidation(form, required);
 
     form.elements.messenger.addEventListener('change', (e) => {
       form.elements.contact.placeholder = CONTACT_PLACEHOLDER[e.target.value];
@@ -212,7 +235,7 @@
 
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const ok = ['name', 'contact', 'email', 'limit'].map((n) => validateField(form, n)).every(Boolean);
+      const ok = required.map((n) => validateField(form, n)).every(Boolean);
       if (!ok) {
         const first = $('.field.invalid .input, .field.invalid .select', form);
         first && first.focus();
