@@ -1,5 +1,8 @@
 /**
- * Enigma Junior — prototype scripts - VERSION 0.5
+ * Enigma Junior — prototype scripts - VERSION 0.6
+ *
+ * v0.6 - MTT version support:
+ * - Form fields switch by <body data-discipline> (cash / mtt)
  *
  * v0.5 - Rudolf feedback: promo/referral field, figure level names
  *
@@ -59,7 +62,7 @@
       return true;
     },
     email: (v) => EMAIL_RE.test(v.trim()) || 'Проверь email — это запасной канал, если в контакте опечатка',
-    limit: (v) => !!v || 'Выбери текущий лимит',
+    limit: (v) => !!v || 'Выбери текущий лимит или ABI',
   };
 
   function validateField(form, name) {
@@ -91,11 +94,31 @@
   // ---------- Apply form ----------
   const CONTACT_PLACEHOLDER = { telegram: '@nickname', discord: 'nickname', whatsapp: '+7 900 000 00 00' };
 
+  // Discipline-specific form fields: <body data-discipline="mtt"> switches to the MTT set
+  const FORM_CONFIG = {
+    cash: {
+      title: 'Заявка в Enigma Junior',
+      limitLabel: 'Текущий лимит',
+      limits: ['NL2', 'NL5', 'NL10', 'NL16–NL25', 'Выше NL25', 'Играю MTT'],
+      volumeLabel: 'Рук в месяц',
+      volumes: ['до 10k', '10–30k', '30–60k', '60k+'],
+    },
+    mtt: {
+      title: 'Заявка в Enigma Junior MTT',
+      limitLabel: 'Текущий ABI',
+      limits: ['до $2', '$2–5', '$5–11', '$11–22', 'Выше $22', 'Играю кэш'],
+      volumeLabel: 'Турниров в месяц',
+      volumes: ['до 300', '300–800', '800–1500', '1500+'],
+    },
+  };
+  const FORM = FORM_CONFIG[document.body.dataset.discipline] || FORM_CONFIG.cash;
+  const options = (list) => list.map((x) => `<option>${x}</option>`).join('');
+
   function applyFormHtml(inModal) {
     return `
       ${inModal ? '<button class="modal-close" type="button" data-close-modal aria-label="Закрыть">×</button>' : ''}
       <form novalidate>
-        <h3>Заявка в Enigma Junior</h3>
+        <h3>${FORM.title}</h3>
         <p class="hint">Менеджер напишет тебе в выбранный мессенджер</p>
         <div class="field">
           <label>Имя</label>
@@ -121,26 +144,18 @@
         </div>
         <div class="field-2">
           <div class="field">
-            <label>Текущий лимит</label>
+            <label>${FORM.limitLabel}</label>
             <select class="select" name="limit">
               <option value="">Выбери</option>
-              <option>NL2</option>
-              <option>NL5</option>
-              <option>NL10</option>
-              <option>NL16–NL25</option>
-              <option>Выше NL25</option>
-              <option>Играю MTT</option>
+              ${options(FORM.limits)}
             </select>
             <span class="err"></span>
           </div>
           <div class="field">
-            <label>Рук в месяц <span class="opt">(примерно)</span></label>
-            <select class="select" name="hands">
+            <label>${FORM.volumeLabel} <span class="opt">(примерно)</span></label>
+            <select class="select" name="volume">
               <option value="">Не знаю</option>
-              <option>до 10k</option>
-              <option>10–30k</option>
-              <option>30–60k</option>
-              <option>60k+</option>
+              ${options(FORM.volumes)}
             </select>
           </div>
         </div>

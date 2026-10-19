@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Чарты по стекам Enigma Junior MTT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=0.6">
+</head>
+<body data-discipline="mtt">
+
+  <header class="header">
+    <div class="wrap">
+      <a href="index.html" class="logo">ENIGMA <span class="logo-tag">JUNIOR MTT</span></a>
+      <div class="header-actions">
+        <a class="btn btn-ghost btn-sm" href="index.html">О программе</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="lm-hero">
+      <div class="wrap lm-grid">
+        <div>
+          <div class="eyebrow">Бонус для своих · МТТ</div>
+          <h1 class="section-title">Чарты по стекам, по которым учатся МТТ-ученики Enigma</h1>
+          <ul class="lm-list">
+            <li>Открытия со всех позиций на 20–40 бб</li>
+            <li>Пуш/фолд и рести на 10–20 бб</li>
+            <li><span class="ph">[что ещё внутри — уточнить у методолога]</span></li>
+          </ul>
+
+          <div class="form" data-lead-form style="margin-top:32px">
+            <form novalidate>
+              <h3>Куда прислать чарты?</h3>
+              <p class="hint">Ник в Telegram или email — пришлём сразу</p>
+              <div class="field">
+                <label>Имя</label>
+                <input class="input" name="name" autocomplete="given-name" placeholder="Как к тебе обращаться">
+                <span class="err"></span>
+              </div>
+              <div class="field">
+                <label>Telegram или email</label>
+                <input class="input" name="channel" autocomplete="off" placeholder="@nickname или you@mail.com">
+                <span class="err"></span>
+              </div>
+              <button class="btn btn-primary btn-block" type="submit">Получить чарты</button>
+              <p class="form-foot">Без спама. Иногда пришлём полезное о программе Junior.</p>
+            </form>
+            <div class="success" data-lead-success hidden>
+              <div class="check">✓</div>
+              <h3>Чарты отправлены</h3>
+              <p>Проверь Telegram или почту. Хочешь учиться по ним с тренером — загляни в программу Junior MTT.</p>
+              <div class="btns">
+                <a class="btn btn-primary" href="index.html#program">Посмотреть программу</a>
+                <a class="btn btn-ghost" href="index.html#apply">Сразу подать заявку</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="lm-preview" data-chart aria-label="Превью префлоп-чарта"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <a href="index.html" class="logo">ENIGMA <span class="logo-tag">JUNIOR MTT</span></a>
+      <div class="footer-links">
+        <a href="https://t.me/enigmapoker" target="_blank" rel="noopener">Telegram-канал</a>
+        <a href="index.html">Программа Junior</a>
+      </div>
+      <small>Прототип · v0.6 · 16.10.2026</small>
+    </div>
+  </footer>
+
+  <script>
+    // Decorative 13x13 range grid: pairs on the diagonal, suited above, offsuit below
+    (function () {
+      const box = document.querySelector('[data-chart]');
+      const raise = (r, c) => r <= 4 || c <= 1 || r === c || (r < c && c - r <= 3 && r <= 8);
+      const call = (r, c) => !raise(r, c) && (r < c ? c <= 9 : r <= 7 && c <= 4);
+      let html = '';
+      for (let r = 0; r < 13; r++) {
+        for (let c = 0; c < 13; c++) {
+          const cls = raise(r, c) && (r <= c || c <= 2) ? 'r' : call(r, c) ? 'c' : '';
+          html += `<i class="${cls}"></i>`;
+        }
+      }
+      box.innerHTML = html;
+    })();
+  </script>
+  <script src="../main.js?v=0.6"></script>
+</body>
+</html>
