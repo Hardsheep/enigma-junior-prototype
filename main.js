@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — prototype scripts - VERSION 0.6
+ * Enigma Junior — prototype scripts - VERSION 0.8
+ *
+ * v0.8 - Response time: «в течение рабочего дня»
  *
  * v0.6 - MTT version support:
  * - Form fields switch by <body data-discipline> (cash / mtt)
@@ -188,7 +190,7 @@
       <div class="success">
         <div class="check">✓</div>
         <h3>Заявка принята, ${escapeHtml(data.name.trim())}</h3>
-        <p>Менеджер напишет в ${channel} (<span class="mono">${escapeHtml(data.contact.trim())}</span>) в течение <span class="ph">[N] часов</span>. Если в контакте опечатка — продублируем на ${escapeHtml(data.email.trim())}.</p>
+        <p>Менеджер напишет в ${channel} (<span class="mono">${escapeHtml(data.contact.trim())}</span>) в течение рабочего дня. Если в контакте опечатка — продублируем на ${escapeHtml(data.email.trim())}.</p>
         <div class="btns">
           <a class="btn btn-primary" href="#" data-manager>Написать менеджеру сейчас</a>
           <a class="btn btn-ghost" href="${TG_CHANNEL_URL}" target="_blank" rel="noopener">Пока ждёшь — Telegram-канал</a>

@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — prototype styles - VERSION 0.5
+ * Enigma Junior — prototype styles - VERSION 0.8
+ *
+ * v0.8 - «Почему 0 $» note, inline CTA strips
  *
  * v0.5 - Rudolf feedback: gold instead of red for fund step
  *
@@ -224,6 +226,24 @@ section { padding: 64px 0; }
 .ladder li.on span:last-child { color: var(--accent); }
 .ladder li.gold { border-color: var(--gold); background: var(--gold-soft); color: var(--gold); box-shadow: 0 0 24px rgba(242, 201, 76, .16); }
 .ladder li.gold span:last-child { color: var(--gold); }
+
+.free-note { margin-top: 14px; max-width: 560px; font-size: 14px; color: var(--text-3); border-left: 2px solid var(--gold); padding-left: 12px; }
+
+/* Inline CTA strip */
+.cta-section { padding: 0; margin: 32px 0; }
+.cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 28px 32px;
+  border-radius: 20px;
+  border: 1px solid var(--accent-soft);
+  background: radial-gradient(500px 200px at 100% 0%, var(--accent-soft), transparent), var(--bg-card);
+}
+.cta-strip h3 { font-size: 22px; margin-bottom: 6px; }
+.cta-strip-btns { display: flex; gap: 10px; flex-wrap: wrap; }
 
 /* Fit block */
 .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
@@ -673,5 +693,7 @@ section { padding: 64px 0; }
   .hero-author { grid-template-columns: 72px 1fr; gap: 14px; }
   .avatar-lg { width: 72px; height: 72px; }
   .mobile-cta { display: block; }
+  .cta-strip { padding: 22px 20px; }
+  .cta-strip-btns, .cta-strip-btns .btn { width: 100%; }
   .hero-facts { gap: 20px; }
 }
