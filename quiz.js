@@ -1,5 +1,7 @@
 /**
- * Enigma Junior — level quiz (prototype B) - VERSION 0.2
+ * Enigma Junior — level quiz (prototype B) - VERSION 0.3
+ *
+ * v0.3 - MTT config: <body data-discipline="mtt"> switches questions, profile and routes
  *
  * v0.2 - «Пока рано» result leads to Enigma Start (course of basics)
  *
@@ -13,7 +15,9 @@
   'use strict';
 
   // Placeholder questions — real ones come from the methodologist
-  const KNOWLEDGE = [
+  const CONFIGS = {
+  cash: {
+    knowledge: [
     {
       q: 'Сколько игроков максимум сидит за столом 6-max?',
       options: ['6', '9', '2'],
@@ -44,9 +48,8 @@
       correct: 0,
       why: 'VPIP — доля раздач, в которых игрок сам положил деньги в банк префлоп.',
     },
-  ];
-
-  const PROFILE = [
+    ],
+    profile: [
     {
       key: 'limit',
       q: 'Какой лимит играешь сейчас?',
@@ -57,10 +60,130 @@
       q: 'Сколько рук играешь в месяц?',
       options: ['до 10k', '10–30k', '30–60k', '60k+'],
     },
-  ];
+    ],
+    low: ['NL2', 'NL5', 'NL10'],
+    high: ['NL16–NL25', 'Выше NL25'],
+    results: {
+    early: {
+      tag: 'Пока рано',
+      title: 'Начни с базы — вот с чего лучше стартовать',
+      text: 'Программа Junior рассчитана на тех, кто уже играет и знает основы. Начни с Enigma Start — курса азов: лучших по финальному тесту зовём на отбор в Junior.',
+      primary: { label: 'Курс азов Enigma Start', href: '../start/' },
+      secondary: { label: 'Всё равно подать заявку', apply: true },
+      extra: { label: 'Забрать префлоп-чарты', href: '../lead-magnet.html' },
+    },
+    junior: {
+      tag: 'Тебе подходит Junior',
+      title: 'Твой путь: NL5 → NL25 за ~3 месяца',
+      text: 'База у тебя есть, программа закроет пробелы и выстроит систему. Начнёшь с уровня 1 вместе с группой.',
+      primary: { label: 'Подать заявку', apply: true },
+      secondary: { label: 'Посмотреть программу', href: '#program' },
+    },
+    fast: {
+      tag: 'Тебе подходит Junior · быстрый темп',
+      title: 'Базу знаешь — пройдёшь программу быстрее',
+      text: 'Теория у тебя крепкая. Скорее всего, первый уровень пролетишь быстро и сосредоточишься на постфлопе и диапазонах.',
+      primary: { label: 'Подать заявку', apply: true },
+      secondary: { label: 'Посмотреть программу', href: '#program' },
+    },
+    main: {
+      tag: 'Похоже, тебе в основу',
+      title: 'С твоим уровнем стоит подаваться сразу в основной состав',
+      text: 'Знания и лимит выше уровня Junior. Подай заявку в основу фонда — там бэкинг и тренер основы.',
+      primary: { label: 'Заявка в основу фонда', href: 'https://enigmapoker.pro', external: true },
+      secondary: { label: 'Всё равно в Junior', apply: true },
+    },
+  },
+    juniorTitle: (lim) => `Твой путь: ${lim} → NL25 за ~3 месяца`,
+  },
+  mtt: {
+    knowledge: [
+      {
+        q: 'Что такое ABI?',
+        options: ['Средний бай-ин турниров, которые ты играешь', 'Средний размер банка', 'Количество турниров в день'],
+        correct: 0,
+        why: 'ABI (average buy-in) — средний бай-ин твоей сетки турниров.',
+      },
+      {
+        q: 'Что значит ITM?',
+        options: ['Попадание в призовую зону', 'Выход за финальный стол', 'Регистрация в турнир'],
+        correct: 0,
+        why: 'ITM (in the money) — ты прошёл баббл и гарантированно получаешь приз.',
+      },
+      {
+        q: 'Что такое баббл?',
+        options: ['Момент прямо перед попаданием в призы', 'Первый уровень блайндов', 'Ребай после вылета'],
+        correct: 0,
+        why: 'Баббл — последнее место без приза. Здесь игроки особенно осторожны.',
+      },
+      {
+        q: 'У тебя 10 бб на баттоне, все сфолдили. Какая стратегия базовая?',
+        options: ['Пуш или фолд', 'Лимп', 'Минрейз и фолд на 3-бет'],
+        correct: 0,
+        why: 'На 10 бб основная стратегия — пуш/фолд: рейз с фолдом теряет слишком большую часть стека.',
+      },
+      {
+        q: 'Что учитывает ICM?',
+        options: ['Ценность фишек в деньгах с учётом призовой структуры', 'Количество фишек у оппонентов', 'Скорость роста блайндов'],
+        correct: 0,
+        why: 'ICM переводит стеки в денежное ожидание с учётом выплат — фишки на финалке стоят по-разному.',
+      },
+    ],
+    profile: [
+      {
+        key: 'limit',
+        q: 'Какой средний ABI играешь сейчас?',
+        options: ['до 2', '2–5', '5–11', '11–22', 'Выше 22', 'Пока не играю на деньги'],
+      },
+      {
+        key: 'volume',
+        q: 'Сколько турниров играешь в месяц?',
+        options: ['до 300', '300–800', '800–1500', '1500+'],
+      },
+    ],
+    low: ['до 2', '2–5'],
+    high: ['5–11', '11–22', 'Выше 22'],
+    results: {
+      early: {
+        tag: 'Пока рано',
+        title: 'Начни с базы — вот с чего лучше стартовать',
+        text: 'Программа Junior MTT рассчитана на тех, кто уже играет турниры и знает основы. Начни с Enigma Start — курса азов: лучших по финальному тесту зовём на отбор в Junior.',
+        primary: { label: 'Курс азов Enigma Start', href: '../../start/' },
+        secondary: { label: 'Всё равно подать заявку', apply: true },
+        extra: { label: 'Забрать чарты по стекам', href: '../lead-magnet.html' },
+      },
+      junior: {
+        tag: 'Тебе подходит Junior MTT',
+        title: 'Твой путь: ABI [2] → ABI [10] за ~[3] месяца',
+        text: 'База у тебя есть, программа закроет пробелы и выстроит систему. Начнёшь с уровня 1 программы вместе с группой.',
+        primary: { label: 'Подать заявку', apply: true },
+        secondary: { label: 'Посмотреть программу', href: '#program' },
+      },
+      fast: {
+        tag: 'Тебе подходит Junior MTT · быстрый темп',
+        title: 'Базу знаешь — пройдёшь программу быстрее',
+        text: 'Теория у тебя крепкая. Скорее всего, первый уровень пролетишь быстро и сосредоточишься на постфлопе и ICM.',
+        primary: { label: 'Подать заявку', apply: true },
+        secondary: { label: 'Посмотреть программу', href: '#program' },
+      },
+      main: {
+        tag: 'Похоже, тебе в основу',
+        title: 'С твоим уровнем стоит подаваться сразу в основной состав',
+        text: 'Знания и ABI выше уровня Junior MTT. Подай заявку в основу МТТ — там бэкинг и тренер основы.',
+        primary: { label: 'Заявка в основу МТТ', href: 'https://enigmamtt.pro', external: true },
+        secondary: { label: 'Всё равно в Junior MTT', apply: true },
+      },
+    },
+    juniorTitle: (lim) => `Твой путь: ABI ${lim} → ABI [10] за ~[3] месяца`,
+  },
+  };
 
-  const LOW_LIMITS = ['NL2', 'NL5', 'NL10'];
-  const HIGH_LIMITS = ['NL16–NL25', 'Выше NL25'];
+  const CFG = CONFIGS[document.body.dataset.discipline] || CONFIGS.cash;
+  const KNOWLEDGE = CFG.knowledge;
+  const PROFILE = CFG.profile;
+  const LOW_LIMITS = CFG.low;
+  const HIGH_LIMITS = CFG.high;
+  const RESULTS = CFG.results;
 
   const root = document.querySelector('[data-quiz]');
   if (!root) return;
@@ -102,38 +225,6 @@
     return 'junior';
   }
 
-  const RESULTS = {
-    early: {
-      tag: 'Пока рано',
-      title: 'Начни с базы — вот с чего лучше стартовать',
-      text: 'Программа Junior рассчитана на тех, кто уже играет и знает основы. Начни с Enigma Start — курса азов: лучших по финальному тесту зовём на отбор в Junior.',
-      primary: { label: 'Курс азов Enigma Start', href: '../start/' },
-      secondary: { label: 'Всё равно подать заявку', apply: true },
-      extra: { label: 'Забрать префлоп-чарты', href: '../lead-magnet.html' },
-    },
-    junior: {
-      tag: 'Тебе подходит Junior',
-      title: 'Твой путь: NL5 → NL25 за ~3 месяца',
-      text: 'База у тебя есть, программа закроет пробелы и выстроит систему. Начнёшь с уровня 1 вместе с группой.',
-      primary: { label: 'Подать заявку', apply: true },
-      secondary: { label: 'Посмотреть программу', href: '#program' },
-    },
-    fast: {
-      tag: 'Тебе подходит Junior · быстрый темп',
-      title: 'Базу знаешь — пройдёшь программу быстрее',
-      text: 'Теория у тебя крепкая. Скорее всего, первый уровень пролетишь быстро и сосредоточишься на постфлопе и диапазонах.',
-      primary: { label: 'Подать заявку', apply: true },
-      secondary: { label: 'Посмотреть программу', href: '#program' },
-    },
-    main: {
-      tag: 'Похоже, тебе в основу',
-      title: 'С твоим уровнем стоит подаваться сразу в основной состав',
-      text: 'Знания и лимит выше уровня Junior. Подай заявку в основу фонда — там бэкинг и тренер основы.',
-      primary: { label: 'Заявка в основу фонда', href: 'https://enigmapoker.pro', external: true },
-      secondary: { label: 'Всё равно в Junior', apply: true },
-    },
-  };
-
   function btn(b, cls) {
     if (b.apply) return `<button class="btn ${cls}" type="button" data-open-apply data-quiz-apply>${esc(b.label)}</button>`;
     return `<a class="btn ${cls}" href="${b.href}"${b.external ? ' target="_blank" rel="noopener"' : ''}>${esc(b.label)}</a>`;
@@ -142,7 +233,7 @@
   function renderResult() {
     const sc = score();
     const r = Object.assign({}, RESULTS[route(sc)]);
-    if (route(sc) === 'junior' && LOW_LIMITS.includes(profile.limit)) r.title = `Твой путь: ${profile.limit} → NL25 за ~3 месяца`;
+    if (route(sc) === 'junior' && LOW_LIMITS.includes(profile.limit)) r.title = CFG.juniorTitle(profile.limit);
     const review = KNOWLEDGE.map((k, i) => {
       const ok = answers[i] === k.correct;
       return `<li class="${ok ? 'ok' : 'miss'}"><span class="mark">${ok ? '✓' : '✗'}</span><span><b>${esc(k.q)}</b><br>${ok ? '' : `Правильно: ${esc(k.options[k.correct])}. `}${esc(k.why)}</span></li>`;
